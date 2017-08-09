@@ -4,8 +4,8 @@ USE chat;
 
 CREATE TABLE messages (
   id INT(5) AUTO_INCREMENT,
-  user INT(25) REFERENCES users(id),
-  room INT(25) REFERENCES rooms(id),
+  user INT(25) FOREIGN KEY REFERENCES users(id),
+  room INT(25) FOREIGN KEY REFERENCES rooms(id),
   text VARCHAR(144),
   PRIMARY KEY(id)
   -- FOREIGN KEY(user) REFERENCES users(id)
@@ -14,8 +14,7 @@ CREATE TABLE messages (
 CREATE TABLE users (
   id INT(5) AUTO_INCREMENT,
   name VARCHAR(25),
-  PRIMARY KEY(id)
-);
+  PRIMARY KEY(id));
 
 
 CREATE TABLE rooms (
