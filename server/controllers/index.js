@@ -3,12 +3,22 @@ var models = require('../models');
 module.exports = {
   messages: {
     get: function (req, res) {
-      //console.log('handling messages GET')
-      // console.log('HANDLING GET:');
+      // invoke the message's get method  on the model
+      models.messages.get(function(data){
+        res.end(JSON.stringify(data));
+      });
+
+      // if get method is successful, end response and pass in returned data
 
     }, // a function which handles a get request for all messages
+
     post: function (req, res) {
-      // console('handling messages POST')
+      console.log("INCOMING MESSAGE: ", req.body);
+      // invoke the model's post method, and pass in the username, text, and room
+      models.messages.post(req.body.username, req.body.roomname, req.body.message, function(){
+        res.end();
+      } );
+      // if post method is successful, end response
 
     } // a function which handles posting a message to the database
   },
@@ -16,7 +26,9 @@ module.exports = {
   users: {
     // Ditto as above
     get: function (req, res) {
-      // console.log('handling users GET')
+      // invoke the user's get method on the model
+      // if get method is successful, end response and pass in returned data
+
     },
     post: function (req, res) {
       // Get username from request

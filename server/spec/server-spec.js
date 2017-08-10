@@ -30,12 +30,14 @@ describe('Persistent Node Chat Server', function() {
   it('Should insert posted messages to the DB', function(done) {
     // Post the user to the chat server.
     request({
+      // adding user to database by triggering POST request for users route
       method: 'POST',
       uri: 'http://127.0.0.1:3000/classes/users',
       json: { username: 'Valjean' }
     }, function () {
       // Post a message to the node chat server:
       request({
+        // if the request was successful in adding the user, add a message to the database by triggering POST request on the controller for messsages route and passing in the username
         method: 'POST',
         uri: 'http://127.0.0.1:3000/classes/messages',
         json: {
@@ -67,8 +69,8 @@ describe('Persistent Node Chat Server', function() {
 
   it('Should output all messages from the DB', function(done) {
     // Let's insert a message into the db
-       var queryString = "INSERT INTO messages ()";
-       var queryArgs = [];
+       var queryString = "INSERT INTO messages (user, roomname, text) VALUES (?, ?, ?) ";
+       var queryArgs = [1, "main", "Men like you can never change!"];
     // TODO - The exact query string and query args to use
     // here depend on the schema you design, so I'll leave
     // them up to you. */
